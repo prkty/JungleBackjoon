@@ -12,9 +12,9 @@ print(F)
 # 본인을 다시 호출하는 재귀함수를 사용한 방법도 있다.
 def factorial(n):
    if n > 1:
-       return n * factorial(n-1)
-   else:
+       return n * factorial(n-1)  
        return 1 
+# 리턴 1에 의해 위로 넘어가고 1*1, 2*1, 3*2 ,4*6 ... 이런식으로 다시올라가서 재귀함수로 팩토리얼을 구현한다. 
    
 n = int(input())  # 입력 받기
 print(factorial(n))  # 팩토리얼 계산 후 출력
