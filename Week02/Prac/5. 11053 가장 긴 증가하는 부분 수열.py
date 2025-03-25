@@ -1,22 +1,38 @@
+# 수열에서 가장 긴 증가하는 부분 수열은 수열에서 어떤 숫자의 큰 숫자가 나오는 경우입니다.
+# 문제 보기와 같이 A = {10, 20, 10, 30, 20, 50}라면 10,20,30,50만 뽑아서
+# 길이는 4입니다.
+# 일단 크면 리스트의 추가한다. 그렇지 않으면 이진탐색을 돌려서 최적의 자리를 찾는다.
+# 10,20,11,12,30의 예시로 생각을 해보면 좀 더 이해하기 쉽다.
+# [10,20]까지는 문제 없는데 11을 이진탐색을 통해 20에 들어갈 수 있음을 알 수 있다.
+# 차피 10보다 크고 20은 마지막 자리니까. 그래야 12를 추가할 수 있음.
+# [10,11]로 바뀌고 차례대로 12,30이 추가되어 길이는 4가 출력된다.
+
 N = int(input())  # 입력 배열의 크기
-arr = list(map(int, input().split()))  # 입력 배열
+arr = list(map(int, input().split()))  # 수열 입력
 
-## 이진탐색 함수
-def binary_search(arr, target):
-    left, right = 0, len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] < target:
-            left = mid + 1
+## 이진탐색 함수(동일한 값이나 밑에 값의 위치를 파악하기 위함)
+def binary_search(arr, target):   # 7. lis, 10이 입력된다.
+    left = 0   # 8. 이진탐색처럼 left는 0으로
+    right = len(arr) - 1   # 9. right는 전체 배열에 1을 뺀만큼 설정한다. 전체 길이가 6이면 마지막 인덱스는 5이다.(0부터 시작하므로)
+    while left <= right:    # 10. 탈출 식을 설정한다. (이진탐색과 동일함)
+        # 조건에 만족하더라도 한 번 사이클 돌고 종료(정확한 left를 구할 수 있음)
+        mid = (left + right) // 2   # 11. 기준값을 정함
+        if arr[mid] < target:    # 12. 만약 기준값보다 타깃이 더 크면 
+            left = mid + 1       # 13. left를 기준값보다 +1인 곳으로 정한다.
         else:
-            right = mid - 1
-    return left
+            right = mid - 1       # 14. 그외에는 right를 기준값보다 -1인 곳으로 정한다.
+    return left                  # 15. 최종적으로 left값을 리턴
+# 여기서 right를 쓰면 안되나 생각이 드는데, right로 하면 mid-1로 타겟보다 작은 값이 위치한다. 그래서 left를 쓰는 것이다.
 
-lis = [arr[0]]
-for i in range(1, len(arr)):
-    if arr[i] > lis[-1]:
-        lis.append(arr[i])
-    else:
-        index = binary_search(lis, arr[i])
-        lis[index] = arr[i]
-print(len(lis))
+lis = [arr[0]]    # 1. lis에 첫번째 원소인 10을 넣는다.
+for i in range(1, len(arr)):    # 2. 두번째 원소부터 원소 배열 길이까지 수행한다(먼저 20)
+    if arr[i] > lis[-1]:       # 3. 현재의 원소인 20이 마지막 원소보다 커서
+        lis.append(arr[i])      # 4. list에 추가한다.(상단으로 올라자)
+    else:   # 5. 만약에 그렇지 않다면(10은 전단계 20보다 작으므로)
+        index = binary_search(lis, arr[i])   # 6. 상단의 함수를 수행한다.
+        lis[index] = arr[i]       # 16. 통과됐다면 인덱스에 입력된다.(최적 길이로 업데이트)
+        
+print(len(lis))    # 17. lis 리스트의 길이를 출력한다.
+
+# 해당 방식은 실제 LIS를 구하는 것이 아니라고 한다. 우리의 목적은 가장 긴 수의 길이를 출력하는 것이므로
+# 이진탐색의 특성을 사용하여 큰 수가 나오면 바로 추가하고 그렇지 않으면 이진 탐색을 돌려 최적화된 길이를 구한다.
