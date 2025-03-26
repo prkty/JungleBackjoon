@@ -11,17 +11,23 @@ def largest_rectangle(hist):
     # 3. 모든 히스토그램 막대를 순회
     while index < len(hist):
         if not stack or hist[index] >= hist[stack[-1]]:
+        # 스택이 비어있지 않고 현재 막대가 스택의 마지막 막대보다 낮으면 처리
             stack.append(index)
-            index += 1
-        else:
+            index += 1     # 다음 인덱스 확인
+            
+        else: 
             # 4. 스택에서 pop하여 넓이 계산
             top = stack.pop()
             height = hist[top]  # pop한 막대의 높이
             width = index if not stack else (index - stack[-1] - 1)
+            # 스택이 비었을 경우 width = index
+            # 스택이 남아있을경우 width = index - stack[-1] -1
+            # 즉 전단계까지의 스택을 빼고 그 값을 인덱스에 빼고 -1을 한다.
+            # 최대 직사각형 넓이를 구할 때, 현재 막대의 너비를 계산하는 과정
             max_area = max(max_area, height * width)
 
     # 5. 남은 요소 처리
-    while stack:
+    while stack:             # 스택이 빌때까지
         top = stack.pop()
         height = hist[top]
         width = index if not stack else (index - stack[-1] - 1)
@@ -40,3 +46,7 @@ while True:
     histogram = data[1:]  # 히스토그램 높이 리스트
     
     print(largest_rectangle(histogram))  # 결과 출력
+    
+# 해당문제를 시도하다가 중단한지 3번인데, 3번째에야 한 50퍼센트 이해한것 같다.
+# 해당문제에서 width를 구하는 로직을 정확하게 모르겠다.
+# 시간이 없기때문에 다른 문제로 넘어가지만 나중에 다시 봐야겠다.
