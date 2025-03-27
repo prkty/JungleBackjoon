@@ -27,8 +27,8 @@ def matrix_mult(A, B):
 
 # 3. 행렬 거듭제곱 함수 (A^exp)
 def matrix_pow(A, exp):
-    if exp == 1:  # ✅ A^1 = A
-        return [[element % 1000 for element in row] for row in A]  # ✅ 1000으로 나눈 나머지 처리
+    if exp == 1:  # A^1 = A
+        return [[element % 1000 for element in row] for row in A]  # 1000으로 나눈 나머지 처리
 
     half = matrix_pow(A, exp // 2)  # A^(B/2) 계산
     half = matrix_mult(half, half)  # A^(B/2) × A^(B/2)
