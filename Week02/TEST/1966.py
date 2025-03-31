@@ -23,5 +23,3 @@ for _ in range(testcase):
                 break
         else:
             que.append(que.popleft())   # 만약에 중요도가 높지 않으면 뽑아서 맨뒤로 이동한다.
-            
-            #ㅁㄴㅇㄹㅁㄴㅇㄹ
