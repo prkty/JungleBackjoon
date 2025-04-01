@@ -34,7 +34,7 @@ def prim(V, edges):    # 입력된 정점 개수 V와 간선 값을 받는다.
 
 # 입력 받기
 V, E = map(int, sys.stdin.readline().split())
-edges = [tuple(map(int, sys.stdin.readline().split())) for _ in range(E)] # 간선의 개수 E만큼 값을 받는다.
+edges = [tuple(map(int, sys.stdin.readline().split())) for _ in range(E)] # 간선의 개수 E만큼 값을 받는다.(2차원 배열)
 
 # 결과 출력
 print(prim(V, edges))
