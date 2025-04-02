@@ -24,6 +24,7 @@ def dijkstra(V, E, start, edges):
         # 현재 노드의 인접 노드 확인
         for nxt_dist, nxt_node in graph[cur_node]:
             new_dist = cur_dist + nxt_dist
+            
             if new_dist < distance[nxt_node]:  # 더 짧은 경로 발견 시 갱신
                 distance[nxt_node] = new_dist
                 heapq.heappush(pq, (new_dist, nxt_node))  # 우선순위 큐에 추가
