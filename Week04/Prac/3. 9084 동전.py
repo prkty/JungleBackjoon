@@ -12,7 +12,7 @@ def coin_dp(coin, M):
     
     for coin in coins:  # 각 동전에 대해
         for i in range(coin, M + 1):
-            dp[i] += dp[i - coin]  
+            dp[i] = dp[i] + dp[i - coin]
             # 해당 수식이 점화식을 말한다. 동전 수가 추가될 때마다 경우의 수가 증가된다.
     return dp[M]
     
